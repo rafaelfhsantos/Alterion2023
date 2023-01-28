@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form name="frmArmaCaC" height="33" theme="light"> 
+
+
+        <layout align="client" margins="{left=4, right=4, top=4, bottom=2}">
+                <!-- Botao para apagar o item da lista -->
+                <button align="left" width="32" text="X" onClick="NDB.deleteNode(sheet);"/>               
+
+                <!-- O titulo do item que aparece na lista -->
+				
+                
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="arma_nome" width ="190" fontSize="14" margins="{left = 2}" transparent="false" fontColor="#000000" /> 
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="arma_dano" width ="170" fontSize="14" margins="{left = 2}" transparent="false" fontColor="#000000" /> 
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="arma_alcance" width ="70" fontSize="14" margins="{left = 2}" transparent="false" fontColor="#000000" /> 
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="arma_aparar" width ="60" fontSize="14" margins="{left = 2}" transparent="false" fontColor="#000000" /> 
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="arma_custo" onChange="" width ="100" fontSize="14" margins="{left = 2}" transparent="false" fontColor="#000000"  type="number"/> 
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="arma_peso" type="float" width ="100" fontSize="14" margins="{left = 2}" transparent="false" fontColor="#000000"  /> 
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="arma_st" width ="70" fontSize="14" margins="{left = 2}" transparent="false" fontColor="#000000" /> 
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="arma_observacao" width ="245" fontSize="14" margins="{left = 2}" transparent="false" fontColor="#000000" /> 
+				
+				
+        </layout>
+</form>

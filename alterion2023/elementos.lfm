@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form name="frmElementos" height="33" theme="light"> 
+
+
+        <layout align="client" margins="{left=4, right=4, top=4, bottom=4}" hitTest="true">
+                <!-- Botao para apagar o item da lista -->
+                <button align="left" width="32" text="X" onClick="NDB.deleteNode(sheet);"/>               
+
+                <!-- O titulo do item que aparece na lista -->
+				
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="elemento" width ="230" fontSize="14" transparent="false" fontColor="#000000" /> 
+				<edit hint="Nível"  align="left" vertTextAlign="center" horzTextAlign="center" field="nivel_elemental" width ="40" fontSize="14" margins="{left = 5}" transparent="false" fontColor="#000000" /> 
+				
+        </layout>
+</form>

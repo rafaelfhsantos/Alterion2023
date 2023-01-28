@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form name="alterion_2023_4" theme="light" align="client">
+
+	<style>
+		edit {fontColor: black;}
+		button {fontColor: black;}
+	</style>
+	 
+
+	<scrollBox align="client">
+		<rectangle width="1200" height="1600" color="white">
+			
+			
+			<!-- Total Gasto -->
+			
+			 <layout left="880" top="5" height="30" width="300">    
+			<rectangle align="left" width="250" height="30" color="white" strokeSize="1.0"></rectangle>
+	 </layout>
+	 
+	 <layout left="880" top="5" height="30" width="300">                     
+                <label align="left" margins="{left = 5}" vertTextAlign="center" width ="140"  text="Pontos iniciais:" fontColor="#000000" fontSize="15" />
+				<edit field="pt_iniciais" align="left" vertTextAlign="center"  fontColor="#8000A0" type="number" fontSize="20" transparent="true"/> 
+	</layout>
+	
+	
+	<layout left="880" top="40" height="30" width="300">    
+			<rectangle align="left" width="250" height="30" color="white" strokeSize="1.0"></rectangle>
+	 </layout>
+	 
+	 <layout left="880" top="40" height="30" width="300">                     
+                <label align="left" margins="{left = 5}" vertTextAlign="center" width ="140"  text="Pontos ganhos:" fontColor="#000000" fontSize="15" />
+				<edit field="pt_ganhos" type="number" align="left" vertTextAlign="center"  fontColor="#8000A0" fontSize="20" transparent="true"/> 
+	</layout>
+	 
+	 
+	 
+	 <layout left="880" top="80" height="30" width="300">    
+			<rectangle align="left" width="250" height="30" color="white" strokeSize="1.0"></rectangle>
+	 </layout>
+	 
+	 <layout left="880" top="80" height="30" width="300">                     
+                <label align="left" margins="{left = 5}" vertTextAlign="center" width ="140"  text="Pontos totais:" fontColor="#000000" fontSize="15" />
+				<label field="pt_total" align="left" vertTextAlign="center"  fontColor="#FF0000" fontSize="20"/> 
+	</layout>
+	 
+	 <layout left="880" top="120" height="30" width="300">    
+			<rectangle align="left" width="250" height="30" color="white" strokeSize="1.0"></rectangle>
+	 </layout>
+	 
+	 <layout left="880" top="120" height="30" width="300">                     
+                <label align="left" margins="{left = 5}" vertTextAlign="center" width ="140"  text="Total Gasto:" fontColor="#000000" fontSize="15" />
+				<label field="totalGasto" align="left" vertTextAlign="center"  fontColor="#FF0000" fontSize="20" />
+	</layout>
+	
+	
+	<layout left="880" top="160" height="30" width="300">    
+			<rectangle align="left" width="250" height="30" color="white" strokeSize="1.0"></rectangle>
+	 </layout>
+	 
+	 <layout left="880" top="160" height="30" width="300">                     
+                <label align="left" margins="{left = 5}" vertTextAlign="center" width ="140"  text="Pontos a gastar:" fontColor="#000000" fontSize="15" />
+				<label field="aGastar" align="left" vertTextAlign="center"  fontColor="#FF0000" fontSize="20" /> 
+	</layout>
+	
+	<button top="50" left="600" text="CALCULAR PONTOS" width ="200" height="105" fontSize="18" fontColor="#FF5050" fontStyle="bold" >
+                    <event name="onClick">                                            
+                        calculaPericias();
+						calculaMagias();
+                    </event>
+			</button>
+			
+			<!-- =============== fim total gasto =============== -->
+			
+		<layout left="15" top="20" height="30" width="300">	
+			<label align="left" margins="{left = 5}" vertTextAlign="center" width ="40"  text="INT:" fontColor="#000000" fontSize="20" />
+			<label field="int" align="left" vertTextAlign="center" width ="40" fontColor="#000000" fontSize="20" /> 	
+			
+			<!-- <label align="left" margins="{left = 30}" vertTextAlign="center" width ="50"  text="SAB:" fontColor="#000000" fontSize="20" />
+			<label field="sab" align="left" vertTextAlign="center" width ="50" fontColor="#000000" fontSize="20" /> 	 -->
+		</layout>
+		
+		<layout left="15" top="60" height="50" width="360">	
+			<label align="left" margins="{left = 5}" vertTextAlign="center" width ="120"  text="Nível Arcano:" fontColor="#000000" fontSize="20" />
+			<edit align="left" margins="{left = 5}" vertTextAlign="center" horzTextAlign="center" width ="50"  field="nivelArcano" fontColor="#000000" fontSize="20" />			
+		</layout>
+			
+		
+		<!--
+		<layout left="420" top="160" height="50" width="110">  
+			<rectangle align="left" width="110" height="30" color="white" strokeSize="1.0"></rectangle>
+		</layout>
+		<layout left="420" top="160" height="50" width="110">
+			<label align="left" margins="{left = 5}" vertTextAlign="center" width ="80"  text="Magias:" fontColor="#000000" fontSize="20" />
+			<label align="left" margins="{left = 5}" vertTextAlign="center" width ="30"  field="qtdMagias" fontColor="#000000" fontSize="20" />
+		</layout>
+		-->
+			
+			
+			
+			<label visible="false" field="orderby"/>
+			
+			<!--===== BOTõES DE ORDENAçãoO ============-->
+			
+			<button top="230" left="150" text="^" width ="20" height="20" fontSize="18"  fontStyle="bold" >
+                    <event name="onClick">   
+						sheet.orderby = 0;
+						self.rclListaMagias:sort();						
+                    </event>
+			</button>
+			
+			<button top="230" left="290" text="^" width ="20" height="20" fontSize="18"  fontStyle="bold" >
+                    <event name="onClick">   
+						sheet.orderby = 1;
+						self.rclListaMagias:sort();						
+                    </event>
+			</button>
+			
+			<button top="230" left="355" text="^" width ="20" height="20" fontSize="18"  fontStyle="bold" >
+                    <event name="onClick">   
+						sheet.orderby = 2;
+						self.rclListaMagias:sort();						
+                    </event>
+			</button>
+			
+			<button top="230" left="410" text="^" width ="20" height="20" fontSize="18"  fontStyle="bold" >
+                    <event name="onClick">   
+						sheet.orderby = 3;
+						self.rclListaMagias:sort();						
+                    </event>
+			</button>
+			
+			<button top="230" left="450" text="^" width ="20" height="20" fontSize="18"  fontStyle="bold" >
+                    <event name="onClick">   
+						sheet.orderby = 4;
+						self.rclListaMagias:sort();						
+                    </event>
+			</button>
+			
+			<button top="230" left="515" text="^" width ="20" height="20" fontSize="18"  fontStyle="bold" >
+                    <event name="onClick">   
+						sheet.orderby = 5;
+						self.rclListaMagias:sort();						
+                    </event>
+			</button>
+			
+			<button top="230" left="750" text="^" width ="20" height="20" fontSize="18"  fontStyle="bold" >
+                    <event name="onClick">   
+						sheet.orderby = 6;
+						self.rclListaMagias:sort();						
+                    </event>
+			</button>
+			
+			
+	
+			<!-- ==================Magias =================-->
+			
+			
+				<label top="200" left="200"  vertTextAlign="center" text="Magias" fontColor="#000000" fontSize="18" margins="{left = 50}" height="30" width="800"/>
+			
+			<layout top="240" height="800" width="1160" left="5">
+				
+				<layout align="top" height="40" margins="{bottom=4 , left=5}">
+					<button text="+" width="40" align="left"  fontSize="25">
+                        <event name="onClick">
+                                          
+                                self.rclListaMagias:append();
+								
+                        </event>
+					</button>
+				</layout>       
+
+				
+				
+        <!-- recordList, representando a lista -->
+				<recordList name="rclListaMagias" field="campoMagias" templateForm="frmMagias" align="client" selectable="true" >
+					<event name="onSelect">
+						  calculaPericias();
+						  calculaMagias();
+					</event>
+					<event name="onCompare"><![CDATA[ 
+						calculaPericias();
+						
+						if (sheet.orderby == 0) then
+							return Utils.compareStringPtBr(nodeA.magia, nodeB.magia);
+						elseif (sheet.orderby == 1) then
+							return Utils.compareStringPtBr(nodeA.atributo, nodeB.atributo);
+						elseif (sheet.orderby == 2) then
+							return Utils.compareStringPtBr(nodeA.mod, nodeB.mod);
+						elseif (sheet.orderby == 3) then
+							return Utils.compareStringPtBr(nodeA.nivel_magia, nodeB.nivel_magia);
+						elseif (sheet.orderby == 4) then
+							return Utils.compareStringPtBr(nodeA.mana, nodeB.mana);
+						elseif (sheet.orderby == 5) then
+							return Utils.compareStringPtBr(nodeA.magia_pt, nodeB.magia_pt);
+						elseif (sheet.orderby == 6) then
+							return Utils.compareStringPtBr(nodeA.notas, nodeB.notas);						
+						else
+							return Utils.compareStringPtBr(nodeA.magia, nodeB.magia);
+						end;
+						]]>
+					</event>
+				</recordList>       
+        <!-- dataScopeBox representando a nossa caixa de detalhes -->  
+        
+			</layout>
+			
+			<layout top="250" height="25" width="1100" left="38">
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Magia" width ="230" fontSize="18"  fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Atributo" width ="70" fontSize="16" margins="{left = 5}"  fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="nível" width ="40" fontSize="18" margins="{left = 5}" 	 fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="mod" width ="40" fontSize="16" margins="{left = 5}"  fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="nível efetivo" width ="100" fontSize="18" margins="{left = 5}" 	 fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="mana" width ="55" fontSize="18" margins="{left = 5}" 	 fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="pts" width ="55" fontSize="18" margins="{left = 5}" 	 fontColor="#000000"/> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Notas" width ="400" fontSize="18" margins="{left = 5}"  fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Página" width ="55" fontSize="16" margins="{left = 5}"  fontColor="#000000" /> 
+			</layout>
+			
+			
+			
+		</rectangle>
+	</scrollBox>
+
+	 <script>
+		function calculaMagias()
+			if sheet == nil then return end; 
+			local listaMagias = NDB.getChildNodes(sheet.campoMagias);
+			
+			sheet.qtdMagias = 0;
+			
+			for i=1, #listaMagias, 1 do
+				
+				if (listaMagias[i].magia_pt == 0 or listaMagias[i].magia_pt == nil) then
+					sheet.qtdMagias = sheet.qtdMagias+1;
+				else end;
+				
+				if (listaMagias[i].magia_pt ~= nil) then
+					if (listaMagias[i].magia_pt == 1) then
+						listaMagias[i].nivel_magia = -2;
+					elseif (listaMagias[i].magia_pt == 2) then
+						listaMagias[i].nivel_magia = -1;
+					elseif (listaMagias[i].magia_pt >= 4) then
+						listaMagias[i].nivel_magia = listaMagias[i].magia_pt/4 -1;
+					else end;
+				end;
+								
+				if (listaMagias[i].atributo == 'SAB') then
+					listaMagias[i].nivel_magia_efetivo = (listaMagias[i].nivel_magia or 0) + (listaMagias[i].mod or 0) + (self.sab_mod.text or 0) + (sheet.nivelArcano or 0);
+				elseif (listaMagias[i].atributo == 'INT') then
+					listaMagias[i].nivel_magia_efetivo = (listaMagias[i].nivel_magia or 0) + (listaMagias[i].mod or 0) + (self.int_mod.text or 0) + (sheet.nivelArcano or 0);
+				else end;
+			end;			
+		end;
+	 </script>
+</form>

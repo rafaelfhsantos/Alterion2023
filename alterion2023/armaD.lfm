@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form name="frmArmaD" height="33" theme="light"> 
+
+
+        <layout align="client" margins="{left=4, right=4, top=4, bottom=2}">
+                <!-- Botao para apagar o item da lista -->
+                <button align="left" width="32" text="X" onClick="NDB.deleteNode(sheet);"/>               
+
+                <!-- O titulo do item que aparece na lista -->
+				
+                
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="armaD_nome" width ="140" fontSize="13" margins="{left = 2}" transparent="false" fontColor="#000000" /> 
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="armaD_dano" width ="120" fontSize="13" margins="{left = 2}" transparent="false" fontColor="#000000" /> 
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="armaD_prec" width ="40" fontSize="13" margins="{left = 2}" transparent="false" fontColor="#000000" /> 
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="armaD_alcance" width ="100" fontSize="13" margins="{left = 2}" transparent="false" fontColor="#000000" /> 
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="armaD_peso" type="float" onChange="" width ="80" fontSize="13" margins="{left = 2}" transparent="false" fontColor="#000000"/> 
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="armaD_cdt" width ="60" fontSize="13" margins="{left = 2}" transparent="false" fontColor="#000000" /> 
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="armaD_tiros" width ="80" fontSize="13" margins="{left = 2}" transparent="false" fontColor="#000000" /> 
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="armaD_st" width ="50" fontSize="13" margins="{left = 2}" transparent="false" fontColor="#000000" /> 
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="armaD_magn" width ="50" fontSize="13" margins="{left = 2}" transparent="false" fontColor="#000000" /> 
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="armaD_RCO" width ="50" fontSize="13" margins="{left = 2}" transparent="false" fontColor="#000000" /> 
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="armaD_custo" onChange="" width ="100" fontSize="13" margins="{left = 2}" transparent="false" fontColor="#000000" type="number"/> 
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="armaD_cl" width ="40" fontSize="13" margins="{left = 2}" transparent="false" fontColor="#000000" /> 
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="armaD_observacao" width ="145" fontSize="13" margins="{left = 2}" transparent="false" fontColor="#000000" /> 
+				
+				
+        </layout>
+		
+		
+</form>

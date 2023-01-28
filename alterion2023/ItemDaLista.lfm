@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form name="frmItemDaLista" height="33" theme="light"> 
+
+
+        <layout align="client" margins="{left=4, right=4, top=4, bottom=4}">
+                <!-- Botao para apagar o item da lista -->
+                <button align="left" width="32" text="X" onClick="NDB.deleteNode(sheet);"/>               
+
+                <!-- O titulo do item que aparece na lista -->
+				
+                <edit   align="left" vertTextAlign="center" horzTextAlign="center" field="pericia" width ="230" fontSize="14" transparent="false" fontColor="#000000" /> 
+				<comboBox   align="left" vertTextAlign="center" horzTextAlign="center" field="atributo" items="{'FOR', 'DES', 'INT'}" width ="70" fontSize="14" margins="{left = 5}" transparent="false" fontColor="#000000" /> 
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="nivel" width ="65" fontSize="14" margins="{left = 5}" transparent="false" fontColor="#000000" /> 
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="mod" width ="40" fontSize="14" margins="{left = 5}" transparent="false" fontColor="#000000" /> 
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="nivel_efetivo" width ="90" fontSize="14" margins="{left = 5}" transparent="false" fontColor="#000000" /> 
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" type="number" field="pericia_pt" width ="55" fontSize="14" margins="{left = 5}" transparent="false" fontColor="#FF0000"/> 
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="pagina" width ="55" fontSize="14" margins="{left = 5}" transparent="false" fontColor="#000000" /> 
+				
+				<button align="left" width="32" text="R">
+                <event name="onClick"><![CDATA[ 
+						Dialogs.inputQuery("Teste de "..sheet.pericia, "Modificadores", "",
+						function (valorPreenchido)
+							if (valorPreenchido == nil) then valorPreenchido = 0 end;									
+							local rolagem = Firecast.interpretarRolagem("1d20+"..sheet.nivel_efetivo.."+"..valorPreenchido);
+							local mesaDoPersonagem = Firecast.getMesaDe(sheet);								
+							mesaDoPersonagem.chat:rolarDados(rolagem, "Teste de "..sheet.pericia.." ("..sheet.atributo..")",function(rolado) end);
+							
+							end, nil,true);
+						]]>
+                </event>
+        </button>
+        </layout>
+</form>

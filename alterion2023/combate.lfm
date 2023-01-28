@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form name="alterion_2023_7" theme="light" align="client">
+
+	<style>
+		edit {fontColor: black;}
+		button {fontColor: black;}
+	</style>
+
+	 
+
+	<scrollBox align="client">
+		<rectangle width="1400" height="1600" color="white">
+		
+							 <!-- Botao de inserir novo item a lista -->
+	 <layout top="10" height="600" width="630">
+		<layout top="0" left="00" height="35" width="630">
+			<label  align="left" vertTextAlign="center" horzTextAlign="center" text="Rolagem" fontColor="#000000" fontSize="16" margins="{left = 35}" height="30" width="330"/>
+			<label  align="left" vertTextAlign="center" horzTextAlign="center" text="Tipo" fontColor="#000000" fontSize="16" margins="{left = 5}" height="30" width="100"/>
+			<label  align="left" vertTextAlign="center" horzTextAlign="center" text="Valor" fontColor="#000000" fontSize="16" margins="{left = 5}" height="30" width="100"/>
+		</layout>  
+	 
+        <layout align="top" height="20" margins="{bottom=4 , left=5}">
+                <button text="Nova Rolagem" width="100" align="left">
+                        <event name="onClick">                  
+                                self.rclListaDasRolagens:append();
+                        </event>
+                </button>
+        </layout>       
+		
+		
+		
+        <!-- recordList, representando a lista -->
+        <recordList name="rclListaDasRolagens" field="campoDasRolagens" templateForm="frmItemDaRolagem" align="client" selectable="true">                            
+
+              
+				
+        </recordList>       
+        <!-- dataScopeBox representando a nossa caixa de detalhes -->  
+        
+	</layout>
+	
+	<layout top="5" height="80" width="1300" left="640">
+		<rectangle align="left" color="white" strokeSize="1.0" height="80" width="220"/> -- Peso total
+		<rectangle align="left" color="white" strokeSize="1.0" height="80" width="225"/> -- Peso sem mochila
+	</layout>	
+	<layout top="5" height="80" width="1300" left="640">
+		<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Peso Total: " width ="100" fontSize="14" margins="{left = 2}"  fontColor="#000000" /> 
+		<label   align="left" vertTextAlign="center" horzTextAlign="leading" field="peso_total" width ="120" fontSize="18" margins="{left = 2}"  fontColor="#00B0B0" /> 
+		<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Peso Total Sem Mochila: " width ="100" fontSize="14" margins="{left = 2}"  fontColor="#000000" /> 
+		<label   align="left" vertTextAlign="center" horzTextAlign="leading" field="peso_total_sm"  width ="120" fontSize="18" margins="{left = 4}"  fontColor="#00B0B0" /> 
+	</layout>			
+	
+	
+	<layout top="90" height="80" width="1300" left="640">	
+		<rectangle align="left" color="white" strokeSize="1.0" height="80" width="150"/>
+		
+		<rectangle align="left" color="white" strokeSize="1.0" height="80" width="200"/>
+		
+	</layout>	
+	<layout top="90" height="80" width="1300" left="640">	
+		<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Deslocamento c/ mochila: " width ="100" fontSize="14" margins="{left = 2}"  fontColor="#000000" /> 
+		<label   align="left" vertTextAlign="center" horzTextAlign="center" field="deslocamento_atual" width ="50" fontSize="25" margins="{left = 2}"  fontColor="#00CC00" /> 
+		
+		<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Defesa c/ mochila: " width ="70" fontSize="14" margins="{left = 20}"  fontColor="#000000" /> 
+		<label   align="left" vertTextAlign="center" horzTextAlign="center" field="esquiva_atual" width ="60" fontSize="25" margins="{left = 2}"  fontColor="#00CC00" />
+				
+	</layout>
+	
+	
+
+	<layout top="180" height="80" width="1300" left="640">	
+		<rectangle align="left" color="white" strokeSize="1.0" height="80" width="150"/>
+		
+		<rectangle align="left" color="white" strokeSize="1.0" height="80" width="200"/>	
+		
+	</layout>	
+	<layout top="180" height="80" width="1300" left="640">	
+		<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Deslocamento sem mochila: " width ="100" fontSize="14" margins="{left = 2}"  fontColor="#000000" /> 
+		<label   align="left" vertTextAlign="center" horzTextAlign="center" field="deslocamento_atual_sm" width ="50" fontSize="25" margins="{left = 2}"  fontColor="#00CC00" /> 
+		
+		<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Defesa sem mochila: " width ="70" fontSize="14" margins="{left = 20}"  fontColor="#000000" /> 
+		<label   align="left" vertTextAlign="center" horzTextAlign="center" field="esquiva_atual_sm" width ="60" fontSize="25" margins="{left = 2}"  fontColor="#00CC00" /> 		
+		
+	</layout>
+
+	
+					
+				
+				
+			
+			<layout top="55" height="26" width="1300" left="635">
+				
+				<label left="105" vertTextAlign="center"  field="carga_Mochila" width ="200" height="25" fontSize="18"  fontColor="#DD0000" /> 
+				<label left="335" vertTextAlign="center"  field="carga_SemMochila" width ="200" height="25" fontSize="18"   fontColor="#DD0000" />
+				
+			</layout>
+	
+	
+		
+			  
+	
+	
+		
+
+	
+		</rectangle>
+	</scrollBox>
+
+	 
+</form>

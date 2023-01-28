@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form name="frmItemDaRolagem" height="33" theme="light">
+
+
+	<layout align="client" margins="{left=4, right=4, top=4, bottom=4}">
+		<!-- Botao para apagar o item da lista -->
+		<button align="left" width="32" text="X" onClick="NDB.deleteNode(sheet);" />
+
+		<!-- O titulo do item que aparece na lista -->
+
+		<edit align="left" vertTextAlign="center" horzTextAlign="center" field="descricao" width="330" fontSize="14" transparent="false" fontColor="#000000" />
+		<comboBox align="left" vertTextAlign="center" horzTextAlign="center" field="tipo" items="{'Dano', 'Teste'}" width="100" fontSize="14" margins="{left = 5}" transparent="false" fontColor="#000000" />
+		<edit align="left" vertTextAlign="center" horzTextAlign="center" field="nh" width="100" fontSize="14" margins="{left = 5}" transparent="false" fontColor="#000000" />
+
+
+		<button align="left" width="32" text="R">
+			<event name="onClick">
+				<![CDATA[ 
+					
+					if (sheet.tipo == "Dano") then						
+						local rolagem = Firecast.interpretarRolagem(sheet.nh); 
+						local mesaDoPersonagem = Firecast.getMesaDe(sheet);	
+						mesaDoPersonagem.chat:rolarDados(rolagem, sheet.descricao);
+					end;
+					
+					if (sheet.tipo == "Teste") then	
+						if (sheet.descricao == nil) then sheet.descricao = "ataque" end;					
+    					Dialogs.inputQuery("Teste de "..sheet.descricao, "Modificadores", "",
+    					function (valorPreenchido)
+        				if (valorPreenchido == nil) then valorPreenchido = 0 end;									
+        				local rolagem = Firecast.interpretarRolagem("1d20+"..sheet.nh.."+"..valorPreenchido);
+        				local mesaDoPersonagem = Firecast.getMesaDe(sheet);	
+        				mesaDoPersonagem.chat:rolarDados(rolagem, "Teste de "..sheet.descricao,function(rolado) end);
+        				end,nil,true);
+					end;
+					
+					
+				]]>
+			</event>
+		</button>
+	</layout>
+</form>

@@ -1,0 +1,688 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form name="alterion_2023_3" theme="light" align="client">
+
+	<style>
+		edit {fontColor: black;}
+		button {fontColor: black;}
+	</style>
+
+<script>
+			<![CDATA[
+			
+			
+			
+				 function self.calculaPeso()
+					
+					if sheet == nil then return end;
+					
+					if sheet.deslocamento == nil then sheet.deslocamento = 5 end;
+					if sheet.base_carga == nil then sheet.base_carga = 10 end;
+					if sheet.esquiva == nil then sheet.esquiva = 10 end;
+					
+					local objetos_armaCac = NDB.getChildNodes(sheet.campoArmasCaC);
+		
+					local pesoCaC = 0;
+		
+					for i=1, #objetos_armaCac, 1 do
+						pesoCaC = pesoCaC + (tonumber(objetos_armaCac[i].arma_peso) or 0);
+					end;
+					
+					
+					local objetos_armaD_peso = NDB.getChildNodes(sheet.campoArmasD);
+		
+					local peso_armaD = 0;
+		
+					for i=1, #objetos_armaD_peso, 1 do
+						peso_armaD = peso_armaD + (tonumber(objetos_armaD_peso[i].armaD_peso) or 0);
+					end;
+					
+					
+					local objetos_armaduras_peso = NDB.getChildNodes(sheet.campoArmaduras);
+		
+					local peso_armarmaduras = 0;
+		
+					for i=1, #objetos_armaduras_peso, 1 do
+						peso_armarmaduras = peso_armarmaduras + (tonumber(objetos_armaduras_peso[i].armadura_peso) or 0);
+					end;
+					
+					
+					local objetos_possesMov_peso = NDB.getChildNodes(sheet.campoPossesMoveis);
+		
+					local peso_possesMov = 0;
+		
+					for i=1, #objetos_possesMov_peso, 1 do
+						peso_possesMov = peso_possesMov + ((tonumber(objetos_possesMov_peso[i].posse_peso) or 0) * (tonumber(objetos_possesMov_peso[i].posse_qtd) or 0));
+					end;
+					
+					
+					
+					local objetos_foraMochila_peso = NDB.getChildNodes(sheet.campoPossesMoveisFM);
+		
+					local peso_foraMochila = 0.000;
+		
+					for i=1, #objetos_foraMochila_peso, 1 do
+						peso_foraMochila = peso_foraMochila + ((tonumber(objetos_foraMochila_peso[i].posse_peso) or 0) * (tonumber(objetos_foraMochila_peso[i].posse_qtd) or 0));
+					end;
+					
+					
+					
+					sheet.peso_total = (pesoCaC or 0) + (peso_armaD or 0) + (peso_armarmaduras or 0) + (peso_possesMov or 0) + (peso_foraMochila or 0);
+					
+					
+					sheet.deslocamento_atual = 0;
+					sheet.deslocamento_atual = (tonumber(sheet.deslocamento) or 0);
+					
+					sheet.esquiva_atual = 3;
+					sheet.esquiva_atual = (tonumber(sheet.esquiva) or 3);
+					
+					sheet.carga_Mochila = 'Leve (0)'					
+					
+					
+					if(tonumber(sheet.peso_total) >= (tonumber(sheet.base_carga2) or 0)) and (tonumber(sheet.peso_total) < (tonumber(sheet.base_carga3) or 0))
+					then
+												
+						sheet.carga_Mochila = 'Média (1)'
+						sheet.deslocamento_atual = (tonumber(sheet.desloc08) or 1);	
+						
+					elseif(tonumber(sheet.peso_total) >= (tonumber(sheet.base_carga3))) and (tonumber(sheet.peso_total) < (tonumber(sheet.base_carga6) or 0))
+						then
+						sheet.deslocamento_atual = (tonumber(sheet.desloc06) or 1);						
+							sheet.esquiva_atual = (tonumber(sheet.esquiva1) or 3);
+							sheet.carga_Mochila = 'Pesada (2)'
+												
+					--[[
+					elseif(tonumber(sheet.peso_total) >= (tonumber(sheet.base_carga6))) and (tonumber(sheet.peso_total) < (tonumber(sheet.base_carga10) or 0))
+						then
+						sheet.deslocamento_atual = (tonumber(sheet.desloc04) or 1);						
+							sheet.esquiva_atual = (tonumber(sheet.esquiva2) or 3);	
+							sheet.carga_Mochila = 'Pesada (3)'			
+							
+					
+					elseif(tonumber(sheet.peso_total) >= (tonumber(sheet.base_carga6))) and (tonumber(sheet.peso_total) < (tonumber(sheet.base_carga10) or 0))
+						then							
+							sheet.deslocamento_atual = (tonumber(sheet.desloc04) or 1);
+							sheet.esquiva_atual = (tonumber(sheet.esquiva3) or 3);	
+							sheet.carga_Mochila = 'Muito Pesada (4)'
+					]]--
+					
+					elseif(sheet.peso_total >= (tonumber(sheet.base_carga6)))
+						then
+							sheet.deslocamento_atual = (tonumber(sheet.deslocamento)-4 or 1);
+							sheet.esquiva_atual = (tonumber(sheet.esquiva)-5 or 5);	
+							sheet.carga_Mochila = '-1 Est/Seg.'
+					
+					end;
+				
+				
+				
+				
+				
+				
+				
+				--  =====================  SEM MOCHILA ================
+				
+				
+				sheet.peso_total_sm = (tonumber(pesoCaC) or 0) + (tonumber(peso_armaD) or 0) + (tonumber(peso_armarmaduras) or 0) + (tonumber(peso_foraMochila) or 0);
+					
+					
+					sheet.deslocamento_atual_sm = 0;
+					sheet.deslocamento_atual_sm = (tonumber(sheet.deslocamento) or 0);
+					
+					sheet.esquiva_atual_sm = 3;
+					sheet.esquiva_atual_sm = (tonumber(sheet.esquiva) or 3);
+					sheet.carga_SemMochila = 'Leve (0)'
+					
+					if(tonumber(sheet.peso_total_sm) >= (tonumber(sheet.base_carga2) or 0)) and (tonumber(sheet.peso_total_sm) < (tonumber(sheet.base_carga3) or 0))
+					then
+											
+						sheet.carga_SemMochila = 'Média (1)'
+						sheet.deslocamento_atual_sm = (tonumber(sheet.desloc08) or 1);								
+						sheet.esquiva_atual_sm = (tonumber(sheet.esquiva1) or 3);
+						
+					elseif(tonumber(sheet.peso_total_sm) >= (tonumber(sheet.base_carga3))) and (tonumber(sheet.peso_total_sm) < (tonumber(sheet.base_carga6) or 0))
+						then
+						sheet.deslocamento_atual_sm = (tonumber(sheet.desloc06) or 1);							
+						sheet.esquiva_atual_sm = (tonumber(sheet.esquiva2) or 3);
+							sheet.carga_SemMochila = 'Pesada (2)'
+					
+					--[[
+					elseif(tonumber(sheet.peso_total_sm) >= (tonumber(sheet.base_carga3))) and (tonumber(sheet.peso_total_sm) < (tonumber(sheet.base_carga6) or 0))
+						then
+						sheet.deslocamento_atual_sm = (tonumber(sheet.desloc04) or 1);
+						sheet.esquiva_atual_sm = (tonumber(sheet.esquiva3) or 3);
+							sheet.carga_SemMochila = 'Pesada (3)'
+							
+							
+					elseif(tonumber(sheet.peso_total_sm) >= (tonumber(sheet.base_carga6))) and (tonumber(sheet.peso_total_sm) < (tonumber(sheet.base_carga10) or 0))
+						then
+							sheet.deslocamento_atual_sm = (tonumber(sheet.desloc02) or 1);
+							sheet.esquiva_atual_sm = (tonumber(sheet.esquiva4) or 3);
+							sheet.carga_SemMochila = 'Muito Pesada (4)'		
+					]]--		
+					
+					elseif(tonumber(sheet.peso_total_sm) >= (tonumber(sheet.base_carga6)))
+						then
+							sheet.deslocamento_atual_sm = (tonumber(sheet.deslocamento)-4 or 1);
+							sheet.esquiva_atual_sm = (tonumber(sheet.esquiva)-5 or 5);
+							sheet.carga_SemMochila = '-1 Est/Seg.'
+					
+					end;
+				
+				
+				
+				-- ================== FIM SEM MOCHILA =====================
+				sheet.conteudoMochila = tonumber(sheet.peso_total) - tonumber(sheet.peso_total_sm)
+				sheet.capRestante = (tonumber(sheet.cap_mochila) or 0) - tonumber(sheet.conteudoMochila)
+				
+				end;
+				
+				
+				
+				
+				
+				
+				
+				function self.calculaCusto()
+				
+				if sheet == nil then return end;
+				
+				local objetos_armaCusto = NDB.getChildNodes(sheet.campoArmasCaC);
+		
+					local armaCusto = 0;
+		
+					for i=1, #objetos_armaCusto, 1 do
+						armaCusto = armaCusto + (tonumber(objetos_armaCusto[i].arma_custo) or 0);
+					end;
+					
+				
+				local objetos_armaD_Custo = NDB.getChildNodes(sheet.campoArmasD);
+		
+					local armaDist_Custo = 0;
+		
+					for i=1, #objetos_armaD_Custo, 1 do
+						armaDist_Custo = armaDist_Custo + (tonumber(objetos_armaD_Custo[i].armaD_custo) or 0);
+					end;
+					
+				
+				
+				local objetos_armaduras_Custo = NDB.getChildNodes(sheet.campoArmaduras);
+		
+					local armaduras_custo = 0;
+		
+					for i=1, #objetos_armaduras_Custo, 1 do
+						armaduras_custo = armaduras_custo + (tonumber(objetos_armaduras_Custo[i].armadura_custo) or 0);
+					end;
+					
+					
+					
+					
+				local objetos_possesMov_Custo = NDB.getChildNodes(sheet.campoPossesMoveis);
+		
+					local possesMov_custo = 0;
+		
+					for i=1, #objetos_possesMov_Custo, 1 do
+						possesMov_custo = possesMov_custo + ((tonumber(objetos_possesMov_Custo[i].posse_custo) or 0) *  (tonumber(objetos_possesMov_Custo[i].posse_qtd) or 0));
+					end;
+					
+					
+					local objetos_outras_posses = NDB.getChildNodes(sheet.campoOutrasPosses);
+		
+					local outras_posses_custo = 0;
+		
+					for i=1, #objetos_outras_posses, 1 do
+						outras_posses_custo = outras_posses_custo + (tonumber(objetos_outras_posses[i].posse_custo) or 0);
+					end;
+					
+					
+					
+					
+					
+					
+					
+					local objetos_possesFM_Custo = NDB.getChildNodes(sheet.campoPossesMoveisFM);
+		
+					local possesFM_custo = 0;
+		
+					for i=1, #objetos_possesFM_Custo, 1 do
+						possesFM_custo = possesFM_custo + ((tonumber(objetos_possesFM_Custo[i].posse_custo) or 0) *  (tonumber(objetos_possesFM_Custo[i].posse_qtd) or 0));
+					end;
+					
+				
+					
+				sheet.custo_total = armaCusto + armaDist_Custo + armaduras_custo + possesMov_custo + outras_posses_custo + possesFM_custo;
+				
+				end;
+				
+				
+				
+			]]>
+				
+			
+			</script>	
+
+	<scrollBox align="client">
+		<rectangle width="1400" height="2500" color="white">
+		
+			<layout top="5" height="80" width="1300" left="5">
+				<rectangle left="0" color="white" strokeSize="1.0" height="80" width="220"/> -- Peso total
+				<rectangle left="223" color="white" strokeSize="1.0" height="80" width="225"/> -- Peso sem mochila
+				<rectangle left="451" color="white" strokeSize="1.0" height="80" width="215"/> -- Custo total
+				
+				<rectangle left="670" color="white" strokeSize="1.0" height="80" width="300"/>
+				<rectangle left="670" color="white" strokeSize="1.0" height="80" width="150"/>
+				
+				<rectangle left="980" color="white" strokeSize="1.0" height="80" width="300"/>
+				<rectangle left="980" color="white" strokeSize="1.0" height="80" width="150"/>
+				
+				
+				
+			
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Peso Total: " width ="100" fontSize="14" margins="{left = 2}"  fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="leading" field="peso_total" width ="120" fontSize="18" margins="{left = 2}"  fontColor="#00B0B0" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Peso Total Sem Mochila: " width ="100" fontSize="14" margins="{left = 2}"  fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="leading" field="peso_total_sm"  width ="120" fontSize="18" margins="{left = 4}"  fontColor="#00B0B0" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Custo Total $: " width ="100" fontSize="14" margins="{left = 2}"  fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="leading" field="custo_total"  width ="120" fontSize="18" margins="{left = 2}"  fontColor="#A0A000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Deslocamento c/ mochila: " width ="100" fontSize="14" margins="{left = 2}"  fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" field="deslocamento_atual" width ="50" fontSize="25" margins="{left = 2}"  fontColor="#00CC00" /> 
+				
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Defesa c/ mochila: " width ="70" fontSize="14" margins="{left = 20}"  fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" field="esquiva_atual" width ="60" fontSize="25" margins="{left = 2}"  fontColor="#00CC00" /> 
+				
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Deslocamento sem mochila: " width ="100" fontSize="14" margins="{left = 2}"  fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" field="deslocamento_atual_sm" width ="50" fontSize="25" margins="{left = 2}"  fontColor="#00CC00" /> 
+				
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Defesa sem mochila: " width ="70" fontSize="14" margins="{left = 20}"  fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" field="esquiva_atual_sm" width ="60" fontSize="25" margins="{left = 2}"  fontColor="#00CC00" /> 
+				
+				
+				
+			</layout>
+			<layout top="55" height="26" width="1300" left="5">
+				
+				<label left="105" vertTextAlign="center"  field="carga_Mochila" width ="200" height="25" fontSize="18"  fontColor="#DD0000" /> 
+				<label left="335" vertTextAlign="center"  field="carga_SemMochila" width ="200" height="25" fontSize="18"   fontColor="#DD0000" />
+				
+			</layout>
+			
+			<button top="400" left="1185" wordWrap="true" text="CALCULAR PESO E CUSTO" width ="200" height="105" fontSize="18" fontColor="#FF5050" fontStyle="bold" >
+                    <event name="onClick">                                            
+                        self.calculaCusto();
+						self.calculaPeso();
+                    </event>
+			</button>
+			
+			<label top="1000" left="1185" vertTextAlign="center" text="Cap. da Mochila:" width ="150" height="25" fontSize="14"  fontColor="#000000" /> 
+			<edit top="1000" left="1300" vertTextAlign="center" horzTextAlign="center" field="cap_mochila" width ="50" height="25" type="float" fontSize="14" fontColor="#000000" onChange="self.calculaPeso();"/> 
+			<label top="1030" left="1185" vertTextAlign="center"  text="Peso da mochila:" width ="150" height="25" fontSize="14"  fontColor="#000000" />
+			<label top="1030" left="1300" vertTextAlign="center"  field="conteudoMochila" width ="50" height="25" fontSize="14"  fontColor="#000000" /> 
+			<label top="1060" left="1185" vertTextAlign="center"  text="Cap. Restante:" width ="150" height="25" fontSize="14"  fontColor="#000000" />
+			<label top="1060" left="1300" vertTextAlign="center"  field="capRestante" width ="50" height="25" fontSize="14"  fontColor="#060" fontStyle="bold"/>
+			
+			
+			<button top="1100" left="1185" wordWrap="true" text="Pack Iniciais" width ="200" height="50" fontSize="18" fontColor="#000000" fontStyle="bold" >
+				<event name="onClick"> 
+					
+					
+					self.rclListaPossesMoveis:append();
+					sheet.campoPossesMoveis.pm1 = {posse_nome="Mochila Pequena", posse_local = "", posse_notas = "Suporta 20kg de carga", posse_qtd = 1, posse_custo = 60, posse_peso = 1.5};
+					sheet.campoPossesMoveis.pm2 = {posse_nome="Odre", posse_local = "Mochila", posse_notas = "Capacidade 4 Litros (4 kg)", posse_qtd = 1, posse_custo = 10, posse_peso =0.12};
+					sheet.campoPossesMoveis.pm3 = {posse_nome="Doses de água", posse_local = "Odre", posse_notas = "", posse_qtd = 8, posse_custo = 0, posse_peso =0.5};
+					sheet.campoPossesMoveis.pm4 = {posse_nome="Equipamento Básico Pessoal", posse_local = "Mochila", posse_notas = "Caixa de fogo e utensílios", posse_qtd = 1, posse_custo = 5, posse_peso = 0.5};
+					sheet.campoPossesMoveis.pm5 = {posse_nome="Algibeira", posse_local = "Mochila", posse_notas = "Capacidade 1,5 kg (150 moedas)", posse_qtd = 1, posse_custo = 10, posse_peso =0.1};		
+					sheet.campoPossesMoveis.pm6 = {posse_nome="Moedas de Cobre", posse_local = "Algibeira", posse_notas = "", posse_qtd = 0, posse_custo = 1, posse_peso =0.01};
+					sheet.campoPossesMoveis.pm7 = {posse_nome="Moedas de Prata", posse_local = "Algibeira", posse_notas = "", posse_qtd = 0, posse_custo = 10, posse_peso =0.01};
+					sheet.campoPossesMoveis.pm8 = {posse_nome="Moedas de Ouro", posse_local = "Algibeira", posse_notas = "", posse_qtd = 0, posse_custo = 200, posse_peso =0.01};
+					sheet.campoPossesMoveis.pm9 = {posse_nome="Rações de Viagem", posse_local = "Mochila", posse_notas = "Refeição de carne seca, queijo, etc.", posse_qtd = 9, posse_custo = 2, posse_peso =0.25};
+					sheet.campoPossesMoveis.pm10 = {posse_nome="Pelagem quente", posse_local = "Mochila", posse_notas = "A winter bedroll", posse_qtd = 1, posse_custo = 50, posse_peso =4};
+					sheet.campoPossesMoveis.pm11 = {posse_nome="Barraca, 1 pessoa", posse_local = "Mochila", posse_notas = "Inclui cordas", posse_qtd = 1, posse_custo = 50, posse_peso =2.5};
+					sheet.campoPossesMoveis.pm12 = {posse_nome="Cobertor", posse_local = "Mochila", posse_notas = "", posse_qtd = 1, posse_custo = 20, posse_peso = 2};
+					sheet.campoPossesMoveis.pm13 = {posse_nome="Linha e Anzol", posse_local = "Mochila", posse_notas = "Básico para pesca", posse_qtd = 1, posse_custo = 50, posse_peso =0.05};
+					
+					
+				</event>		
+			</button>
+			
+			<button top="1200" left="1185" wordWrap="true" text="CALCULAR PESO E CUSTO" width ="200" height="105" fontSize="18" fontColor="#FF5050" fontStyle="bold" >
+                    <event name="onClick">                                            
+                        self.calculaCusto();
+						self.calculaPeso();
+                    </event>
+			</button>
+		
+			
+			<label top="100" left="250"  vertTextAlign="center" text="ARMAS" fontColor="#000000" fontSize="18" margins="{left = 50}" height="30" width="800"/>
+			
+			<layout top="130" height="200" width="1100" left="5">
+				
+				<layout align="top" height="40" margins="{bottom=4 , left=5}">
+					<button text="+" width="40" align="left"  fontSize="25">
+                        <event name="onClick">
+                                            
+                                self.rclListaArmasCaC:append();
+                        </event>
+					</button>
+				</layout>       
+
+				
+				
+        <!-- recordList, representando a lista -->
+				<recordList name="rclListaArmasCaC" field="campoArmasCaC" templateForm="frmArmaCaC"
+                    align="client" selectable="true" hitTest="true">                              
+
+					<event name="onSelect">
+						self.calculaPeso();
+						self.calculaCusto();
+					</event>
+					
+					
+				</recordList>       
+        <!-- dataScopeBox representando a nossa caixa de detalhes -->  
+        
+			</layout>
+			
+			<layout top="140" height="20" width="1100" left="35">
+					<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Nome" width ="190" fontSize="14" margins="{left = 2}"  fontColor="#000000" /> 
+					<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Dano" width ="170" fontSize="14" margins="{left = 2}"  fontColor="#000000" /> 
+					<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Tipo" width ="70" fontSize="14" margins="{left = 2}"  fontColor="#000000" /> 
+					<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Alcance" width ="60" fontSize="14" margins="{left = 2}"  fontColor="#000000" /> 
+					<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Custo $" width ="100" fontSize="14" margins="{left = 2}"  fontColor="#000000" /> 
+					<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Peso" width ="100" fontSize="14" margins="{left = 2}"  fontColor="#000000" /> 
+					<label   align="left" vertTextAlign="center" horzTextAlign="center" text="FOR" width ="70" fontSize="14" margins="{left = 2}"  fontColor="#000000" /> 
+					<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Notas" width ="230" fontSize="14" margins="{left = 2}"  fontColor="#000000" /> 
+				</layout>
+			
+	
+			
+			
+			<!-- ====================== ARMADURAS ============================-->		
+			
+			
+				<label top="610" left="200"  vertTextAlign="center" text="Armaduras" fontColor="#000000" fontSize="18" margins="{left = 50}" height="30" width="800"/>
+			
+			<layout top="650" height="200" width="1160" left="5">
+				
+				<layout align="top" height="40" margins="{bottom=4 , left=5}">
+					<button text="+" width="40" align="left"  fontSize="25">
+                        <event name="onClick">
+                                            
+                                self.rclListaArmaduras:append();
+                        </event>
+					</button>
+				</layout>       
+
+				
+				
+        <!-- recordList, representando a lista -->
+				<recordList name="rclListaArmaduras" field="campoArmaduras" templateForm="frmArmadura"
+                    align="client" selectable="true">                              
+
+					<event name="onSelect">
+						self.calculaPeso();
+						self.calculaCusto();
+					</event>
+				</recordList>       
+        <!-- dataScopeBox representando a nossa caixa de detalhes -->  
+        
+			</layout>
+			
+			<layout top="660" height="20" width="1100" left="35">
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Armadura" width ="200" fontSize="14" margins="{left = 2}"  fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="PVs" width ="50" fontSize="14" margins="{left = 2}"  fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Custo $" width ="100" fontSize="14" margins="{left = 2}"  fontColor="#000000"/> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Peso" width ="80" fontSize="14" margins="{left = 2}"  fontColor="#000000" />
+				
+			</layout>	
+			
+			
+			<!-- ============ Cabecalho ====== -->
+			
+			
+			
+			
+			<layout top="875" height="80" width="1300" left="5">
+				<rectangle color="white" strokeSize="1.0" height="80" width="1100"/>
+				<rectangle left="670" color="white" strokeSize="1.0" height="80" width="300"/>
+				<rectangle left="670" color="white" strokeSize="1.0" height="80" width="150"/>
+				<rectangle left="980" color="white" strokeSize="1.0" height="80" width="300"/>
+				<rectangle left="980" color="white" strokeSize="1.0" height="80" width="150"/>
+				
+			
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Peso Total: " width ="100" fontSize="14" margins="{left = 2}"  fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" field="peso_total" width ="120" fontSize="18" margins="{left = 2}"  fontColor="#005050" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Peso Total Sem Mochila: " width ="100" fontSize="14" margins="{left = 2}"  fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" field="peso_total_sm" width ="120" fontSize="18" margins="{left = 2}"  fontColor="#005050" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Custo Total $: " width ="100" fontSize="14" margins="{left = 2}"  fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" field="custo_total" width ="120" fontSize="18" margins="{left = 2}"  fontColor="#505000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Deslocamento c/ mochila: " width ="100" fontSize="14" margins="{left = 2}"  fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" field="deslocamento_atual" width ="50" fontSize="25" margins="{left = 2}"  fontColor="#005500" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Defesa c/ mochila: " width ="70" fontSize="14" margins="{left = 20}"  fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" field="esquiva_atual" width ="60" fontSize="25" margins="{left = 2}"  fontColor="#005500" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Deslocamento sem mochila: " width ="100" fontSize="14" margins="{left = 2}"  fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" field="deslocamento_atual_sm" width ="50" fontSize="25" margins="{left = 2}"  fontColor="#005500" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" text="Defesa sem mochila: " width ="70" fontSize="14" margins="{left = 20}"  fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" field="esquiva_atual_sm" width ="60" fontSize="25" margins="{left = 2}"  fontColor="#005500" /> 
+				
+				
+			</layout>
+			
+			
+			<!-- ====================== MOCHILA ============================-->	
+			
+				<label top="965" left="200"  vertTextAlign="center" text="MOCHILA" fontColor="#000000" fontSize="18" margins="{left = 50}" height="30" width="800"/>
+			
+			<!--===== BOT�ES DE ORDENA��O ============-->
+			
+			<label visible="false" field="orderbyMochila"/>
+			
+			<button top="990" left="130" text="^" width ="20" height="20" fontSize="18"  fontStyle="bold" >
+                    <event name="onClick">   
+						sheet.orderbyMochila = 0;
+						self.rclListaPossesMoveis:sort();						
+                    </event>
+			</button>
+			
+			<button top="990" left="300" text="^" width ="20" height="20" fontSize="18"  fontStyle="bold" >
+                    <event name="onClick">   
+						sheet.orderbyMochila = 1;
+						self.rclListaPossesMoveis:sort();						
+                    </event>
+			</button>
+			
+			<button top="990" left="540" text="^" width ="20" height="20" fontSize="18"  fontStyle="bold" >
+                    <event name="onClick">   
+						sheet.orderbyMochila = 2;
+						self.rclListaPossesMoveis:sort();						
+                    </event>
+			</button>
+			
+			<button top="990" left="740" text="^" width ="20" height="20" fontSize="18"  fontStyle="bold" >
+                    <event name="onClick">   
+						sheet.orderbyMochila = 3;
+						self.rclListaPossesMoveis:sort();						
+                    </event>
+			</button>
+			
+			<button top="990" left="840" text="^" width ="20" height="20" fontSize="18"  fontStyle="bold" >
+                    <event name="onClick">   
+						sheet.orderbyMochila = 4;
+						self.rclListaPossesMoveis:sort();						
+                    </event>
+			</button>
+			
+			<button top="990" left="930" text="^" width ="20" height="20" fontSize="18"  fontStyle="bold" >
+                    <event name="onClick">   
+						sheet.orderbyMochila = 5;
+						self.rclListaPossesMoveis:sort();						
+                    </event>
+			</button>
+			
+			
+			<!--===== FIM BOT�ES DE ORDENA��O ============-->
+			
+			
+			<layout top="1005" height="400" width="1160" left="5">
+				
+				<layout align="top" height="40" margins="{bottom=4 , left=5}">
+					<button text="+" width="40" align="left"  fontSize="25">
+                        <event name="onClick">                                            
+                            self.rclListaPossesMoveis:append();
+                        </event>						
+					</button>
+				</layout>       
+
+				
+				
+        <!-- recordList, representando a lista -->
+				<recordList name="rclListaPossesMoveis" field="campoPossesMoveis" templateForm="frmPosses"
+                    align="client" selectable="true">                              
+
+					<event name="onSelect">
+						self.calculaPeso();
+						self.calculaCusto();
+					</event>
+					
+					<event name="onCompare"><![CDATA[ 
+						
+						self.calculaPeso();
+						self.calculaCusto();
+						
+						if (sheet.orderbyMochila == 0) then
+							return Utils.compareStringPtBr(nodeA.posse_nome, nodeB.posse_nome);
+						elseif (sheet.orderbyMochila == 1) then
+							return Utils.compareStringPtBr(nodeA.posse_local, nodeB.posse_local);
+						elseif (sheet.orderbyMochila == 2) then
+							return Utils.compareStringPtBr(nodeA.posse_notas, nodeB.posse_notas);
+							
+						elseif (sheet.orderbyMochila == 3) then
+							if (	(tonumber(nodeA.posse_qtd) or 0) < (tonumber(nodeB.posse_qtd) or 0))	then
+								return -1;
+							elseif	((tonumber(nodeA.posse_qtd) or 0) > (tonumber(nodeB.posse_qtd) or 0) )then
+								return 1;
+							else
+								return Utils.compareStringPtBr(nodeA.posse_nome, nodeB.posse_nome);
+							end;
+							
+						elseif (sheet.orderbyMochila == 4) then
+							if (	(tonumber(nodeA.posse_custo) or 0) < (tonumber(nodeB.posse_custo) or 0)	)then
+								return -1;
+							elseif (	(tonumber(nodeA.posse_custo) or 0) > (tonumber(nodeB.posse_custo) or 0)	)then
+								return 1;
+							else
+								return Utils.compareStringPtBr(nodeA.posse_nome, nodeB.posse_nome);
+							end;
+							
+						elseif (sheet.orderbyMochila == 5) then
+							if (	(tonumber(nodeA.posse_peso) or 0) < (tonumber(nodeB.posse_peso) or 0)	)then
+								return -1;
+							elseif (	(tonumber(nodeA.posse_peso) or 0) > (tonumber(nodeB.posse_peso) or 0)	)then
+								return 1;
+							else
+								return Utils.compareStringPtBr(nodeA.posse_nome, nodeB.posse_nome);
+							end;		
+						
+						end;
+						]]>
+					</event>
+				
+					
+					
+				</recordList>       
+        <!-- dataScopeBox representando a nossa caixa de detalhes -->  
+        
+			</layout>
+			
+			<layout top="1015" height="20" width="1100" left="35">
+				<label   align="left" vertTextAlign="center" horzTextAlign="center"  width ="200" fontSize="13" margins="{left = 2}" text="Posse" fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" width ="150" fontSize="13" margins="{left = 2}" 	text="Local" fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center"  width ="305" fontSize="13" margins="{left = 2}" text="Notas" fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center"  width ="100" fontSize="13" margins="{left = 2}" text="Qtd" fontColor="#000000"/> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center"  width ="100" fontSize="13" margins="{left = 2}" text="Custo $" fontColor="#000000"/> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" width ="80" fontSize="13" margins="{left = 2}" 	text="Peso" fontColor="#000000" />
+			</layout>
+
+			<!-- ====================== Fora da MOCHILA ============================-->	
+			
+				<label top="1450" left="200"  vertTextAlign="center" text="Equipamentos Fora da Mochila" fontColor="#000000" fontSize="18" margins="{left = 50}" height="30" width="800"/>
+			
+			<layout top="1490" height="400" width="1160" left="5">
+				
+				<layout align="top" height="40" margins="{bottom=4 , left=5}">
+					<button text="+" width="40" align="left"  fontSize="25">
+                        <event name="onClick">
+                                            
+                                self.rclListaPossesMoveisFM:append();
+                        </event>
+					</button>
+				</layout>       
+
+				
+				
+        <!-- recordList, representando a lista -->
+				<recordList name="rclListaPossesMoveisFM" field="campoPossesMoveisFM" templateForm="frmPosses"
+                    align="client" selectable="true">                              
+
+					<event name="onSelect">
+						self.calculaPeso();
+						self.calculaCusto();
+					</event>
+				</recordList>       
+        <!-- dataScopeBox representando a nossa caixa de detalhes -->  
+        
+			</layout>
+			
+			<layout top="1500" height="20" width="1100" left="35">
+				<label   align="left" vertTextAlign="center" horzTextAlign="center"  width ="200" fontSize="13" margins="{left = 2}" text="Posse" fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" width ="150" fontSize="13" margins="{left = 2}" 	text="Local" fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center"  width ="305" fontSize="13" margins="{left = 2}" text="Notas" fontColor="#000000" /> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center"  width ="100" fontSize="13" margins="{left = 2}" text="Qtd" fontColor="#000000"/> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center"  width ="100" fontSize="13" margins="{left = 2}" text="Custo $" fontColor="#000000"/> 
+				<label   align="left" vertTextAlign="center" horzTextAlign="center" width ="80" fontSize="13" margins="{left = 2}" 	text="Peso" fontColor="#000000" />
+			</layout>
+			
+			
+			
+			<!-- ====================== OUTRAS POSSES ============================-->	
+			
+			
+			<label top="1900" left="200"  vertTextAlign="center" text="Outras Posses" fontColor="#000000" fontSize="18" margins="{left = 50}" height="30" width="800"/>
+			
+			<layout top="1940" height="300" width="1050" left="5">
+				
+				<layout align="top" height="40" margins="{bottom=4 , left=5}">
+					<button text="+" width="40" align="left"  fontSize="25">
+                        <event name="onClick">
+                                            
+                                self.rclListaOutrasPosses:append();
+                        </event>
+					</button>
+				</layout>       
+
+				
+				
+        <!-- recordList, representando a lista -->
+				<recordList name="rclListaOutrasPosses" field="campoOutrasPosses" templateForm="frmOutrasPosses" align="client" selectable="true"> 
+					<event name="onSelect">
+						self.calculaCusto();
+					</event>	
+				</recordList>       
+        <!-- dataScopeBox representando a nossa caixa de detalhes -->  
+        
+			</layout>
+			
+			<layout top="1950" height="20" width="1100" left="35">
+				<label   align="left" vertTextAlign="center" horzTextAlign="center"  width ="800" fontSize="16" margins="{left = 2}" text="Posse" fontColor="#000000" /> 
+				
+				<label   align="left" vertTextAlign="center" horzTextAlign="center"  width ="100" fontSize="16" margins="{left = 2}" text="Custo $" fontColor="#000000"/> 
+				
+			</layout>	
+			
+			
+			
+			
+		</rectangle>
+	</scrollBox>
+
+	 
+</form>

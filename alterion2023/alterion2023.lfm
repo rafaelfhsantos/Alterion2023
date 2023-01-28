@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form formType="sheetTemplate" dataType="alterion_2023" title="Alterion 2023" name="alterion_2023" theme="light">
+
+	<style>
+		label {fontColor: black;}
+		button {fontColor: black;}
+	</style>
+   <!--<scrollBox align="client" width="1200" height="1600" > -->
+   
+	<tabControl  align="client" >
+        <tab title="Frente"  >			
+			<import file="1.lfm"/>			
+        </tab>
+        <tab title="Perícias">			
+			<import file="2.lfm"/>			
+        </tab>
+		<tab title="Equipamento">			
+			<import file="3.lfm"/>			
+        </tab>		
+		<tab title="Magias">			
+			<import file="4.lfm"/>			
+        </tab>		
+		<tab title="Biografia">			
+			<import file="5.lfm"/>			
+        </tab>		
+		<tab title="Anotações">			
+			<import file="anotacoes.lfm"/>			
+        </tab>
+		<tab title="COMBATE!">			
+			<import file="combate.lfm"/>			
+        </tab>
+    </tabControl>	
+	<!--</scrollBox> -->
+</form>

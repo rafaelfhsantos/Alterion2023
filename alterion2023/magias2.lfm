@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form name="frmMagias2" height="33" theme="light"> 
+
+
+        <layout align="client" margins="{left=4, right=4, top=4, bottom=4}" hitTest="true">
+                <!-- Botao para apagar o item da lista -->
+                <button align="left" width="32" text="X" onClick="NDB.deleteNode(sheet);"/>               
+
+                <!-- O titulo do item que aparece na lista -->
+				
+				<edit   align="left" vertTextAlign="center" horzTextAlign="center" field="magia" width ="230" fontSize="14" transparent="false" fontColor="#000000" /> 
+				<edit hint="Dificuldade"  align="left" vertTextAlign="center" horzTextAlign="center" field="dificuldade" width ="40" fontSize="14" margins="{left = 5}" transparent="false" fontColor="#000000" /> 
+				<edit hint="Nível de Habilidade Relativo"  align="left" vertTextAlign="center" horzTextAlign="center" field="nh_relativo" width ="75" fontSize="14" margins="{left = 5}" transparent="false" fontColor="#000000" /> 
+				<edit hint="Nível de Habilidade"  align="left" vertTextAlign="center" type="number" horzTextAlign="center" field="nh" width ="55" fontSize="14" margins="{left = 5}" transparent="false" fontColor="#000000" /> 
+				<edit hint="Tempo de Operação"  align="left" vertTextAlign="center" horzTextAlign="center" field="tempo_operacao" width ="55" fontSize="14" margins="{left = 5}" transparent="false" fontColor="#000000" /> 
+				<edit hint="Custo para Fazer"  align="left" vertTextAlign="center" horzTextAlign="center" field="custo_fazer" width ="55" fontSize="14" margins="{left = 5}" transparent="false" fontColor="#000000" /> 
+				<edit hint="Custo para Manter"  align="left" vertTextAlign="center" horzTextAlign="center" field="custo_manter" width ="55" fontSize="14" margins="{left = 5}" transparent="false" fontColor="#000000" /> 
+				<edit hint="Pontos"  align="left" vertTextAlign="center" horzTextAlign="center" type="number" field="magia_pt" width ="55" fontSize="14" margins="{left = 5}" transparent="false" fontColor="#FF0000"/> 
+				<edit hint=""  align="left" vertTextAlign="center" horzTextAlign="center" field="notas" width ="300" fontSize="14" margins="{left = 5}" transparent="false" fontColor="#000000" /> 
+				<edit hint="Página do GURPS Magic"  align="left" vertTextAlign="center" horzTextAlign="center" field="pagina" width ="55" fontSize="14" margins="{left = 5}" transparent="false" fontColor="#000000" /> 
+				<button align="left" width="32" text="R">
+					<event name="onClick"><![CDATA[ 
+						Dialogs.inputQuery("Teste de "..sheet.magia, "Modificador", "",
+							function (valorPreenchido)
+								if (valorPreenchido == nil) then valorPreenchido =0 end; 
+								local rolagem = Firecast.interpretarRolagem("3d6");
+								local mesaDoPersonagem = Firecast.getMesaDe(sheet);							
+								mesaDoPersonagem.chat:rolarDados(rolagem, "Teste de "..sheet.magia.." NH efetivo "..math.floor(sheet.nh+valorPreenchido),	
+									function(rolado)
+									
+									if (rolado.resultado <= math.floor(sheet.nh+valorPreenchido) and rolado.resultado < 17) then
+										mesaDoPersonagem.chat:enviarMensagem("SUCESSO - margem de acerto:[�K3] "..(math.floor(sheet.nh+valorPreenchido)-rolado.resultado).." ");
+									else
+										mesaDoPersonagem.chat:enviarMensagem("FALHA - margem de erro: [�K4] "..(math.floor(sheet.nh+valorPreenchido)-rolado.resultado).." ");
+									end;
+								end);
+										
+							end,       
+	
+							function()
+								showMessage("Ocancelou");
+							end);
+							]]>
+					</event>
+				</button>
+        </layout>
+</form>
